@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordenes - CrudKafkaPinot</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .btn { padding: 6px 12px; text-decoration: none; border-radius: 4px; color: white; }
+        .btn-primary { background: #007bff; }
+        .btn-warning { background: #ffc107; color: black; }
+        .btn-danger  { background: #dc3545; }
+    </style>
+</head>
+<body>
+<h1>Ordenes</h1>
+<a class="btn btn-primary" th:href="@{/ordenes/nueva}">+ Nueva Orden</a>
+<br><br>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th><th>Cliente ID</th><th>Total</th>
+            <th>Estado</th><th>Fecha</th><th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="orden : ${ordenes}">
+            <td th:text="${orden.id}"></td>
+            <td th:text="${orden.clienteId}"></td>
+            <td th:text="${'$' + orden.total}"></td>
+            <td th:text="${orden.estado}"></td>
+            <td th:text="${#temporals.format(orden.fecha, 'dd/MM/yyyy HH:mm')}"></td>
+            <td>
+                <a class="btn btn-warning" th:href="@{/ordenes/editar/{id}(id=${orden.id})}">Editar</a>
+                <a class="btn btn-danger"  th:href="@{/ordenes/eliminar/{id}(id=${orden.id})}"
+                   onclick="return confirm('Eliminar esta orden?')">Eliminar</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(ordenes)}">
+            <td colspan="6" style="text-align:center">No hay ordenes registradas.</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

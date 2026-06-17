@@ -1,0 +1,18 @@
+{
+  "schemaName": "ordenes",
+  "dimensionFieldSpecs": [
+    { "name": "id",        "dataType": "LONG"   },
+    { "name": "estado",    "dataType": "STRING" },
+    { "name": "clienteId", "dataType": "LONG"   },
+    { "name": "productos", "dataType": "STRING", "singleValueField": false }
+  ],
+  "metricFieldSpecs": [
+    { "name": "total", "dataType": "DOUBLE" }
+  ],
+  "dateTimeFieldSpecs": [{
+    "name": "fecha",
+    "dataType": "LONG",
+    "format": "1:MILLISECONDS:EPOCH",
+    "granularity": "1:MILLISECONDS"
+  }]
+}

@@ -1,0 +1,32 @@
+{
+  "tableName": "ordenes",
+  "tableType": "REALTIME",
+  "segmentsConfig": {
+    "timeColumnName": "fecha",
+    "replication": "1",
+    "replicasPerPartition": "1",
+    "schemaName": "ordenes",
+    "retentionTimeUnit": "DAYS",
+    "retentionTimeValue": "7"
+  },
+  "tableIndexConfig": {
+    "loadMode": "MMAP",
+    "streamConfigs": {
+      "streamType": "kafka",
+      "stream.kafka.topic.name": "ordenes-topic",
+      "stream.kafka.broker.list": "kafka:29092",
+      "stream.kafka.consumer.type": "lowlevel",
+      "stream.kafka.consumer.factory.class.name": "org.apache.pinot.plugin.stream.kafka20.KafkaConsumerFactory",
+      "stream.kafka.decoder.class.name": "org.apache.pinot.plugin.inputformat.json.JSONMessageDecoder",
+      "stream.kafka.consumer.prop.auto.offset.reset": "smallest",
+      "realtime.segment.flush.threshold.rows": "0",
+      "realtime.segment.flush.threshold.time": "24h",
+      "realtime.segment.flush.threshold.segment.size": "50M"
+    }
+  },
+  "ingestionConfig": {
+    "continueOnError": true
+  },
+  "tenants": {},
+  "metadata": {}
+}
